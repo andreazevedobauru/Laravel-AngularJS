@@ -19,3 +19,14 @@ $factory->define(GerenciadorProjeto\User::class, function (Faker\Generator $fake
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(GerenciadorProjeto\Client::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->name,
+        'responsible' => $faker->name,
+        'email' => $faker->email,
+        'telefone' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'obs' => $faker->sentence
+    ];
+});
