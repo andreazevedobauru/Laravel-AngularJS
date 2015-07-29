@@ -2,6 +2,7 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
+use GerenciadorProjeto\Models\Client;
 use Illuminate\Http\Request;
 
 use GerenciadorProjeto\Http\Requests;
@@ -16,7 +17,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return \GerenciadorProjeto\Client::all();
+        
+        return \GerenciadorProjeto\Models\Client::all();
     }
 
     /**
