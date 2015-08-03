@@ -2,7 +2,7 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
-use GerenciadorProjeto\Models\Client;
+use GerenciadorProjeto\Repositories\ClientRepository;
 use Illuminate\Http\Request;
 
 use GerenciadorProjeto\Http\Requests;
@@ -15,10 +15,10 @@ class ClientController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(ClientRepository $repository)
     {
         
-        return \GerenciadorProjeto\Models\Client::all();
+        return $repository->all();
     }
 
     /**
