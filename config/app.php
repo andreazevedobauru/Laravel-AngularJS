@@ -143,6 +143,7 @@ return [
         GerenciadorProjeto\Providers\AppServiceProvider::class,
         GerenciadorProjeto\Providers\EventServiceProvider::class,
         GerenciadorProjeto\Providers\RouteServiceProvider::class,
+        GerenciadorProjeto\Providers\GerenciadorProjeto::class,
         /*
         * Repositorie PRETTUS
         */

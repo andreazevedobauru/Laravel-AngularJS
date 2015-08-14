@@ -5,11 +5,19 @@ namespace GerenciadorProjeto\Http\Controllers;
 use GerenciadorProjeto\Repositories\ClientRepository;
 use Illuminate\Http\Request;
 
-use GerenciadorProjeto\Http\Requests;
-use GerenciadorProjeto\Http\Controllers\Controller;
 
 class ClientController extends Controller
 {
+    /**
+     * @var
+     */
+
+    private $repository;
+
+    public function __construct(ClientRepository $repository){
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +26,7 @@ class ClientController extends Controller
     public function index(ClientRepository $repository)
     {
         
-        return $repository->all();
+        return $this->repository->all();
     }
 
     /**
@@ -28,7 +36,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return $this->repository->create($this->repository->all());
     }
 
     /**
@@ -39,7 +47,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return Client::create($request->all());
+        return $this->repository->create($request->all());
     }
 
     /**

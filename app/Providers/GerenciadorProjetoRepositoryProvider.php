@@ -23,6 +23,7 @@ class GerenciadorProjetoRepositoryProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+        $this->app->bind(\GerenciadorProjeto\Repositories\ClientRepository::class, \GerenciadorProjeto\Repositories\ClientRepositoryEloquent::class);
     }
 }
