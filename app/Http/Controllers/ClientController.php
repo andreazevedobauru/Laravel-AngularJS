@@ -66,7 +66,7 @@ class ClientController extends Controller
     {
         return $this->repository->find($id);
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
