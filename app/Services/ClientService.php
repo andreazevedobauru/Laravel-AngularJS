@@ -12,6 +12,7 @@ namespace GerenciadorProjeto\Services;
 use GerenciadorProjeto\Repositories\ClientRepository;
 use GerenciadorProjeto\Validators\ClientValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ClientService
 {
@@ -19,6 +20,7 @@ class ClientService
      * @var ClientRepository
      */
     protected $repository;
+
     /**
      * @var ClientValidator
      */
@@ -29,11 +31,11 @@ class ClientService
         $this->validator = $validator;
     }
 
-    public function create(array $data)){
+    public function create(array $data){
         try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->create($data);
-        } cath ( ValidatorException $e ){
+        }catch( ValidatorException $e ){
             return [
                 'error' => true,
                 'message' => $e->getMessageBag()
@@ -45,11 +47,11 @@ class ClientService
         try{
             $this->validator->with($data)->passesOrFail();
             return $this->repository->update($data, $id);
-        } cath ( ValidatorException $e ){
+        }catch( ValidatorException $e ){
             return [
                 'error' => true,
                 'message' => $e->getMessageBag()
             ];
-    }
+        }
     }
 }
