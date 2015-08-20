@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://laravel-angular/',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,7 +143,7 @@ return [
         GerenciadorProjeto\Providers\AppServiceProvider::class,
         GerenciadorProjeto\Providers\EventServiceProvider::class,
         GerenciadorProjeto\Providers\RouteServiceProvider::class,
-        GerenciadorProjeto\Providers\GerenciadorProjeto::class,
+        GerenciadorProjeto\Providers\GerenciadorProjetoRepositoryProvider::class,
         /*
         * Repositorie PRETTUS
         */

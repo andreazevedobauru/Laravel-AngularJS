@@ -10,20 +10,46 @@ namespace GerenciadorProjeto\Services;
 
 
 use GerenciadorProjeto\Repositories\ClientRepository;
+use GerenciadorProjeto\Validators\ClientValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 class ClientService
 {
+    /*
+     * @var ClientRepository
+     */
     protected $repository;
+    /**
+     * @var ClientValidator
+     */
+    protected $validator;
 
-    public function __construct(ClientRepository $repository){
+    public function __construct(ClientRepository $repository, ClientValidator $validator){
         $this->repository = $repository;
+        $this->validator = $validator;
     }
 
     public function create(array $data)){
-        return $this->repository->create($data);
+        try{
+            $this->validator->with($data)->passesOrFail();
+            return $this->repository->create($data);
+        } cath ( ValidatorException $e ){
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
     }
 
     public function update(array $data, $id){
-        return $this->repository->update($data, $id);
+        try{
+            $this->validator->with($data)->passesOrFail();
+            return $this->repository->update($data, $id);
+        } cath ( ValidatorException $e ){
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+    }
     }
 }
