@@ -11,14 +11,16 @@ namespace GerenciadorProjeto\Validators;
 
 use Prettus\Validator\LaravelValidator;
 
-class ClientValidator extends LaravelValidator
+class ProjectValidator extends LaravelValidator
 {
     protected  $rules = [
+        'owner_id' => 'required|integer',
+        'client_id' => 'required|integer',
         'nome' => 'required|max:255',
-        'responsible' => 'required|max:255',
-        'email' => 'required|email',
-        'telefone' => 'required',
-        'address' => 'required'
+        'description' => 'required',
+        'status' => 'required',
+        'progress' => 'required',
+        'due_date' => 'required'
     ];
 
 
