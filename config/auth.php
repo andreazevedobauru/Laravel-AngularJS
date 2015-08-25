@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => GerenciadorProjeto\User::class,
+    'model' => GerenciadorProjeto\Entities\User::class,
 
     /*
     |--------------------------------------------------------------------------

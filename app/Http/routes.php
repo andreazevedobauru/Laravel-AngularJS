@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('oauth/access_token', function(){
+    return Response::json(Authorizer::issueAccessToken());
+    });
 
 Route::get('client', 'ClientController@index');
 Route::post('client', 'ClientController@store');
