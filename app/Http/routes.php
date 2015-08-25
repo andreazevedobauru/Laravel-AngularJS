@@ -22,8 +22,12 @@ Route::post('oauth/access_token', function(){
 Route::group(['middleware'=>'oauth'], function(){
 
     Route::resource('client', 'ClientController', [ 'except' => ['create', 'edit'] ]);
-    Route::resource('project', 'ProjectController', [ 'except' => ['create', 'edit'] ]);
 
+    Route::group(['middleware'=>'CheckProjectOwner'], function(){
+
+        Route::resource('project', 'ProjectController', [ 'except' => ['create', 'edit'] ]);
+
+    });
 
     Route::group(['prefix'=>'project'], function(){
 
@@ -34,6 +38,7 @@ Route::group(['middleware'=>'oauth'], function(){
         Route::delete('{id}/note/{noteId}', 'ProjectNoteController@destroy');
 
     });
+
 
 
 
