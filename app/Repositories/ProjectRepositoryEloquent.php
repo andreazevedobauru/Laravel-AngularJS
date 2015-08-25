@@ -17,16 +17,22 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
      *
      * @return string
      */
-    public function model()
-    {
+    public function model(){
         return Project::class;
     }
 
     /**
      * Boot up the repository, pushing criteria
      */
-    public function boot()
-    {
+    public function boot(){
         $this->pushCriteria( app(RequestCriteria::class) );
+    }
+
+    public function isOwner( $projectId, $userId ){
+        if(count($this->findWhere(['id'=>$projectId, 'owner_id'=>$userId])) > 0){
+            return true;
+        }
+
+        return false;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
+
 use GerenciadorProjeto\Entities\Project;
 use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Services\ProjectService;
@@ -65,7 +66,13 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        $userId = \Authorizer::getResourceOwnerId();
+
+        if($this->repository->isOwner($id, $userId) == false){
+            return ['success'=>false];
+        }
         return $this->repository->find($id);
+
     }
 
     /**
