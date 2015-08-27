@@ -8,7 +8,6 @@ use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Services\ProjectService;
 use Illuminate\Http\Request;
 
-
 class ProjectController extends Controller
 {
     /**
