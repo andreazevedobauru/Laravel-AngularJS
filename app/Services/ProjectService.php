@@ -13,6 +13,8 @@ use GerenciadorProjeto\Repositories\ClientRepository;
 use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Validators\ClientValidator;
 use GerenciadorProjeto\Validators\ProjectValidator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -55,5 +57,11 @@ class ProjectService
                 'message' => $e->getMessageBag()
             ];
         }
+    }
+
+    public function createFile(array $data){
+
+        Storage::put( $data['name'].'.'.$data['extension'], File::get($data['file']) );
+
     }
 }
