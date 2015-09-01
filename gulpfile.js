@@ -61,6 +61,12 @@ gulp.task('copy-scripts', function(){
         .pipe(gulp.dest(config.build_vendor_path_js))
         .pipe(livereload());
 });
+
+gulp.task('watch-dev', function(){
+    livereload.listen();
+    gulp.start('copy-styles', 'copy-scripts');
+    gulp.watch(config.assets_path+'/**', ['copy-styles', 'copy-scripts']);
+});
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
