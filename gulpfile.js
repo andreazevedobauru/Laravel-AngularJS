@@ -1,6 +1,6 @@
 var elixir     = require('laravel-elixir'),
     livereload = require('gulp-livereload'),
-    clean      = require('gulp-clean'),
+    clean      = require('rimraf'),
     gulp        = require('gulp');
 
 gulp.task('teste', function(){
@@ -62,7 +62,11 @@ gulp.task('copy-scripts', function(){
         .pipe(livereload());
 });
 
-gulp.task('watch-dev', function(){
+gulp.task('clear-build-folder', function(){
+    clean.sync(config.build_path);
+});
+
+gulp.task('watch-dev', ['clear-build-folder'], function(){
     livereload.listen();
     gulp.start('copy-styles', 'copy-scripts');
     gulp.watch(config.assets_path+'/**', ['copy-styles', 'copy-scripts']);
