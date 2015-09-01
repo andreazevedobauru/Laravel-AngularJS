@@ -10,7 +10,12 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
+    @if(Config::get('app.debug'))
+        <link href="{{ asset('build/css/vendor/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('build/css/vendor/bootstrap.theme.min.css') }}" rel="stylesheet" />
+    @else
+        <link href="{{ elixir('/css/all.css') }}" rel="stylesheet" />
+    @endif
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -56,7 +61,16 @@
 	@yield('content')
 
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</body>
+    @if(Config::get('app.debug'))
+        <script src="{{ asset('build/js/vendor/jquery.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-route.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-resource.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-animate.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-messages.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/ui-bootstrap.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/navbar.min.js') }}" ></script>
+    @else
+        <script src="{{ elixir('js/all.js') }}" ></script>
+    @endif
 </html>
