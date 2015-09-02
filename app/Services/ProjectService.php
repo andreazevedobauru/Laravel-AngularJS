@@ -9,14 +9,12 @@
 namespace GerenciadorProjeto\Services;
 
 
-use GerenciadorProjeto\Repositories\ClientRepository;
 use GerenciadorProjeto\Repositories\ProjectRepository;
-use GerenciadorProjeto\Validators\ClientValidator;
 use GerenciadorProjeto\Validators\ProjectValidator;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Contracts\Filesystem\Factory as Storage;
+use Illuminate\Filesystem\Filesystem;
+
 
 class ProjectService
 {
@@ -30,9 +28,11 @@ class ProjectService
      */
     protected $validator;
 
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator){
+    public function __construct(ProjectRepository $repository, ProjectValidator $validator, Filesystem $filesystem, Storage $storage){
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->filesystem = $filesystem;
+        $this->storage = $storage;
     }
 
     public function create(array $data){
@@ -61,7 +61,7 @@ class ProjectService
 
     public function createFile(array $data){
 
-        Storage::put( $data['name'].'.'.$data['extension'], File::get($data['file']) );
+        $this->storage->put( $data['name'].'.'.$data['extension'], $this->filesystem->get($data['file']) );
 
     }
 }
