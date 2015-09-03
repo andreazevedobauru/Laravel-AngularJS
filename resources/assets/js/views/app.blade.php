@@ -65,11 +65,17 @@
 	<!-- Scripts -->
     @if(Config::get('app.debug'))
         <script src="{{ asset('build/js/vendor/jquery.min.js') }}" ></script>
+
         <script src="{{ asset('build/js/vendor/angular.min.js') }}" ></script>
         <script src="{{ asset('build/js/vendor/angular-route.min.js') }}" ></script>
         <script src="{{ asset('build/js/vendor/angular-resource.min.js') }}" ></script>
         <script src="{{ asset('build/js/vendor/angular-animate.min.js') }}" ></script>
         <script src="{{ asset('build/js/vendor/angular-messages.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-cookies.min.js') }}" ></script>
+        <script src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}" ></script>
+
+        <script src="{{ asset('build/js/vendor/query-string.js') }}" ></script>
+
         <script src="{{ asset('build/js/vendor/ui-bootstrap.min.js') }}" ></script>
         <script src="{{ asset('build/js/vendor/navbar.min.js') }}" ></script>
         <script src="{{ asset('build/js/app.js') }}" ></script>
