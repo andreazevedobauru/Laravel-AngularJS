@@ -417,6 +417,33 @@ this.init=function(g,h){e=g,this.config=h,e.$render=function(){d.render()},b.ite
 /**
  * Created by andre on 03/09/2015.
  */
-var app = angular.module('app', ['ng']);
+var app = angular.module('app', ['ngRoute', 'app.controllers']);
 
+angular.module('app.controllers', []);
+
+app.config(function($routeProvider){
+    $routeProvider
+        .when('/login', {
+            templateUrl: 'build/views/login.html',
+            controller: 'LoginController'
+        })
+        .when('/home',{
+            templateUrl: 'build/views/home.html',
+            controller:  'HomeController'
+        })
+});
+angular.module('app.controllers')
+    .controller('HomeController', ['$scope', function ($scope) {
+
+    }]);
+angular.module('app.controllers')
+    .controller('LoginController', ['$scope', function ($scope) {
+        $scope.user = {
+            username: '',
+            password: ''
+        };
+        $scope.login = function(){
+
+        };
+    }]);
 //# sourceMappingURL=all.js.map
