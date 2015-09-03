@@ -25,7 +25,7 @@ config.vendor_path_js = [
     config.bower_path + '/angular-animate/angular-animate.min.js',
     config.bower_path + '/angular-messages/angular-messages.min.js',
     config.bower_path + '/angular-bootstrap/ui-bootstrap.min.js',
-    config.bower_path + '/angular-strap/module/navbar.min.js'
+    config.bower_path + '/angular-strap/dist/modules/navbar.min.js'
 ];
 
 
@@ -33,7 +33,7 @@ config.build_path_css = config.build_path + '/css';
 config.build_vendor_path_css = config.build_path_css + '/vendor';
 config.vendor_path_css = [
     config.bower_path + '/bootstrap/dist/css/bootstrap.min.css',
-    config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.js'
+    config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.css'
 ];
 
 
@@ -66,11 +66,20 @@ gulp.task('clear-build-folder', function(){
     clean.sync(config.build_path);
 });
 
+gulp.task('default', ['clear-build-folder'], function(){
+   elixir(function(mix){
+       mix.styles(config.vendor_path_css.concat([config.assets_path+'/css/**/*.css']), 'public/css/all.css', config.assets_path);
+       mix.scripts(config.vendor_path_js.concat([config.assets_path+'/js/**/*.js']), 'public/js/all.js', config.assets_path);
+       mix.version(['js/all.js', 'css/all.css']);
+   });
+});
+
 gulp.task('watch-dev', ['clear-build-folder'], function(){
     livereload.listen();
     gulp.start('copy-styles', 'copy-scripts');
     gulp.watch(config.assets_path+'/**', ['copy-styles', 'copy-scripts']);
 });
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -81,7 +90,8 @@ gulp.task('watch-dev', ['clear-build-folder'], function(){
  | file for our application, as well as publishing vendor resources.
  |
  */
-
+/*
 elixir(function(mix) {
     mix.sass('app.scss');
 });
+*/
