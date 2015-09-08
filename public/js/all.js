@@ -497,9 +497,24 @@ e+" > 4096 bytes)!");k.cookie=d}}g.module("ngCookies",["ng"]).provider("$cookies
  */
 var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers']);
 
-angular.module('app.controllers', ['angular-oauth2']);
+angular.module('app.controllers', ['ngMessages','angular-oauth2']);
 
-app.config(['$routeProvider', 'OAuthProvider',function($routeProvider, OAuthProvider){
+
+app.provider('appConfig', function () {
+    var config = {
+      baseUrl: 'http://laravel-angular'
+    };
+
+    return {
+        config: config,
+        $get: function () {
+            return config;
+        }
+    }
+});
+
+app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider',
+    function($routeProvider, OAuthProvider, appConfigProvider){
     $routeProvider
         .when('/login', {
             templateUrl: 'build/views/login.html',
@@ -511,11 +526,11 @@ app.config(['$routeProvider', 'OAuthProvider',function($routeProvider, OAuthProv
         });
 
         OAuthProvider.configure({
-                baseUrl: 'http://laravel-angular',
-                clientId: 'app',
-                clientSecret: 'secret', // optional
-                grantPath: 'oauth/access_token'
-            });
+            baseUrl: appConfigProvider.config.baseUrl,
+            clientId: 'appid1',
+            clientSecret: 'secret', // optional
+            grantPath: 'oauth/access_token'
+        });
 
 }]);
 
@@ -540,18 +555,28 @@ angular.module('app.controllers')
 
     }]);
 angular.module('app.controllers')
-    .controller('LoginController', ['$scope', '$location', 'OAuth', function ($scope, $location, OAuth) {
+    .controller('LoginController', ['$scope', '$location', 'OAuth',
+        function ($scope, $location, OAuth) {
         $scope.user = {
             username: '',
             password: ''
         };
+
+        $scope.error = {
+            message: '',
+            error: false
+        };
+
         $scope.login = function(){
-            console.log($scope.user);
-            OAuth.getAccessToken($scope.user).then(function(){
-                $location.path('home');
-            }, function () {
-                alert('Login Invalido');
-            });
+
+            if($scope.form.$valid) {
+                OAuth.getAccessToken($scope.user).then(function(){
+                    $location.path('home');
+                }, function (data) {
+                    $scope.error.error = true;
+                    $scope.error.message = data.data.error_description;
+                });
+            }
         };
     }]);
 //# sourceMappingURL=all.js.map

@@ -2,6 +2,7 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
+use GerenciadorProjeto\Entities\Client;
 use GerenciadorProjeto\Repositories\ClientRepository;
 use GerenciadorProjeto\Services\ClientService;
 use Illuminate\Http\Request;
@@ -64,7 +65,12 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return $this->repository->find($id);
+        if($this->checkExist($id)){
+            return $this->repository->find($id);
+        }else{
+            return ['error'=>'Cliente nao encontrado!'];
+        }
+
     }
 
     /**
@@ -76,7 +82,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->service->update(Request::all(), $id);
+        if($this->checkExist($id)){
+            return $this->service->update(Request::all(), $id);
+        }else{
+            return ['error'=>'Cliente nao encontrado!'];
+        }
     }
 
     /**
@@ -87,6 +97,25 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        return $this->repository->delete($id);
+        if($this->checkExist($id)){
+            return $this->repository->delete($id);
+        }else{
+            return ['error'=>'Cliente nao encontrado!'];
+        }
+    }
+
+
+    /**
+     * Testando se existe o dado com o ID informado
+     *
+     * @param int $id
+     * return boolean
+     */
+    private function checkExist($id){
+        if(Client::find($id)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
