@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal" role="form" name="form" method="POST" ng-submit="save()">
+                        <div class="form-group" ng-class="{'has-error': !form.name.$valid && form.name.$touched}">
+                            <label class="col-md-4 control-label">Nome</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" value="" ng-model="client.name" required>
+
+                                <div ng-messages="form.name.$error" class="help-block" ng-show="form.name.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.responsible.$valid && form.responsible.$touched}">
+                            <label class="col-md-4 control-label">Responsible</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="responsible" value="" ng-model="client.responsible" required>
+
+                                <div ng-messages="form.responsible.$error" class="help-block" ng-show="form.responsible.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.email.$valid && form.email.$touched}">
+                            <label class="col-md-4 control-label">E-mail</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="email" value="" ng-model="client.email" required>
+
+                                <div ng-messages="form.email.$error" class="help-block" ng-show="form.email.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.telefone.$valid && form.telefone.$touched}">
+                            <label class="col-md-4 control-label">Telefone</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="telefone" value="" ng-model="client.telefone" required>
+
+                                <div ng-messages="form.telefone.$error" class="help-block" ng-show="form.telefone.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.address.$valid && form.address.$touched}">
+                            <label class="col-md-4 control-label">Address</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="address" value="" ng-model="client.address" required>
+
+                                <div ng-messages="form.address.$error" class="help-block" ng-show="form.address.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.obs.$valid && form.obs.$touched}">
+                            <label class="col-md-4 control-label">Obs</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="obs" value="" ng-model="client.obs" required>
+
+                                <div ng-messages="form.obs.$error" class="help-block" ng-show="form.obs.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
