@@ -4,12 +4,14 @@
 angular.module('app.controllers')
     .controller('ClientNewController', ['$scope', '$location', 'Client',
         function ($scope, $location, Client) {
-            $scope.clients = new Client();
+            $scope.client = new Client();
             
             $scope.save = function () {
-                //Envia um post direto pro client
-                $scope.client.$save().then(function () {
-                    $location.path('/clients');
-                });
+                if($scope.form.$valid){
+                    //Envia um post direto pro client
+                    $scope.client.$save().then(function () {
+                        $location.path('/clients');
+                    });
+                }
             }
         }]);
