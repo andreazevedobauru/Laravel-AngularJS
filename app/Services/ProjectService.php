@@ -60,8 +60,10 @@ class ProjectService
     }
 
     public function createFile(array $data){
-
-        $this->storage->put( $data['name'].'.'.$data['extension'], $this->filesystem->get($data['file']) );
+        $project = $this->repository->skipPresenter()->find($data['project_id']);
+        //dd($project);
+        $projectFile = $project->files()->create($data);
+        $this->storage->put( $projectFile->id.'.'.$data['extension'], $this->filesystem->get($data['file']) );
 
     }
 }
