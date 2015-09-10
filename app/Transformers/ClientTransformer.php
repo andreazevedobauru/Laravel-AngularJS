@@ -13,7 +13,7 @@ use League\Fractal\TransformerAbstract;
 
 class ClientTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['members'];
+    //protected $defaultIncludes = ['members'];
 
     public function transform(Client $client){
         return [
