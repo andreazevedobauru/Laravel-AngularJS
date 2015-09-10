@@ -20,8 +20,22 @@ app.provider('appConfig', function () {
     }
 });
 
-app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider', 'OAuthTokenProvider',
-    function($routeProvider, OAuthProvider, appConfigProvider, OAuthTokenProvider){
+app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvider', 'OAuthTokenProvider',
+    function($routeProvider, $httpProvider, OAuthProvider, appConfigProvider, OAuthTokenProvider){
+        $httpProvider.defaults.transformResponse = function(data, headers){
+            var headersGetter = headers();
+            if(headersGetter['content-type'] == 'application/json' || headersGetter['content-type'] == 'text/json') {
+                var dataJson = JSON.parse(data);
+                //transformando o retorno em json
+                if(dataJson.hasOwnProperty('data')) {
+                    dataJson = dataJson.data;
+                }
+                return dataJson;
+            }
+            return data;
+
+        };
+
     $routeProvider
         .when('/login', {
             templateUrl: 'build/views/login.html',
