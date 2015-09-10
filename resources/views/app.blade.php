@@ -6,13 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Eprom</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     @if(Config::get('app.debug'))
-        <link href="{{ asset('build/css/vendor/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('build/css/vendor/bootstrap.theme.min.css') }}" rel="stylesheet" />
+		<link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+		<link href="{{ asset('build/css/components.css') }}" rel="stylesheet">
+		<link href="{{ asset('build/css/flaticon.css') }}" rel="stylesheet">
+		<link href="{{ asset('build/css/font-awesome.css') }}" rel="stylesheet">
+		<link href="{{ asset('build/css/vendor/bootstrap-theme.min.css') }}" rel="stylesheet" />
     @else
         <link href="{{ elixir('/css/all.css') }}" rel="stylesheet" />
     @endif

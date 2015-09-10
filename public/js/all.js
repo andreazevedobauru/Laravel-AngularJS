@@ -495,9 +495,10 @@ e+" > 4096 bytes)!");k.cookie=d}}g.module("ngCookies",["ng"]).provider("$cookies
 /**
  * Created by andre on 03/09/2015.
  */
-var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers']);
+var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services']);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
+angular.module('app.services', ['ngResource']);
 
 
 app.provider('appConfig', function () {
@@ -513,8 +514,8 @@ app.provider('appConfig', function () {
     }
 });
 
-app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider',
-    function($routeProvider, OAuthProvider, appConfigProvider){
+app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider', 'OAuthTokenProvider',
+    function($routeProvider, OAuthProvider, appConfigProvider, OAuthTokenProvider){
     $routeProvider
         .when('/login', {
             templateUrl: 'build/views/login.html',
@@ -523,6 +524,22 @@ app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider',
         .when('/home',{
             templateUrl: 'build/views/home.html',
             controller:  'HomeController'
+        })
+        .when('/clients',{
+            templateUrl: 'build/views/client/list.html',
+            controller:  'ClientListController'
+        })
+        .when('/clients/new',{
+            templateUrl: 'build/views/client/new.html',
+            controller:  'ClientNewController'
+        })
+        .when('/clients/:id/edit',{
+            templateUrl: 'build/views/client/edit.html',
+            controller:  'ClientEditController'
+        })
+        .when('/clients/:id/remove',{
+            templateUrl: 'build/views/client/remove.html',
+            controller:  'ClientRemoveController'
         });
 
         OAuthProvider.configure({
@@ -530,6 +547,13 @@ app.config(['$routeProvider', 'OAuthProvider', 'appConfigProvider',
             clientId: 'appid1',
             clientSecret: 'secret', // optional
             grantPath: 'oauth/access_token'
+        });
+
+        OAuthTokenProvider.configure({
+            name: 'token',
+            options: {
+                secure: false
+            }
         });
 
 }]);
@@ -579,4 +603,72 @@ angular.module('app.controllers')
             }
         };
     }]);
+/**
+ * Created by andre on 09/09/2015.
+ */
+angular.module('app.services')
+.service('Client', ['$resource', 'appConfig', function ($resource, appConfig) {
+        return $resource(appConfig.baseUrl + '/client/:id', {id: '@id'}, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }]);
+/**
+ * Created by andre on 09/09/2015.
+ */
+angular.module('app.controllers')
+    .controller('ClientEditController', ['$scope', '$routeParams', '$location', 'Client',
+        function ($scope, $routeParams, $location, Client) {
+            $scope.client = Client.get({id: $routeParams.id});
+            
+            $scope.save = function () {
+                if($scope.form.$valid){
+                    Client.update({id: $scope.client.id}, $scope.client, function () {
+                        $location.path('/clients');
+                    });
+
+                }
+            }
+        }]);
+/**
+ * Created by andre on 09/09/2015.
+ */
+angular.module('app.controllers')
+    .controller('ClientListController', ['$scope', 'Client',
+        function ($scope, Client) {
+            $scope.clients = Client.query();
+
+        }]);
+/**
+ * Created by andre on 09/09/2015.
+ */
+angular.module('app.controllers')
+    .controller('ClientNewController', ['$scope', '$location', 'Client',
+        function ($scope, $location, Client) {
+            $scope.client = new Client();
+            
+            $scope.save = function () {
+                if($scope.form.$valid){
+                    //Envia um post direto pro client
+                    $scope.client.$save().then(function () {
+                        $location.path('/clients');
+                    });
+                }
+            }
+        }]);
+/**
+ * Created by andre on 09/09/2015.
+ */
+angular.module('app.controllers')
+    .controller('ClientRemoveController', ['$scope', '$routeParams', '$location', 'Client',
+        function ($scope, $routeParams, $location, Client) {
+            $scope.client = Client.get({id: $routeParams.id});
+
+            $scope.remove = function () {
+                $scope.client.$delete().then(function () {
+                    $location.path('/clients');
+                });
+            }
+        }]);
 //# sourceMappingURL=all.js.map
