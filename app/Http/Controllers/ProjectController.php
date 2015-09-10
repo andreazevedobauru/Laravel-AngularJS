@@ -85,7 +85,7 @@ class ProjectController extends Controller
         if($this->checkProjectPermissions($id) == false){
             return ['error'=>'Access Forbidden'];
         }
-        return $this->service->update(Request::all(), $id);
+        return $this->service->update($request->all(), $id);
     }
 
     /**

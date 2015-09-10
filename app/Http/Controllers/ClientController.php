@@ -82,11 +82,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($this->checkExist($id)){
-            return $this->service->update(Request::all(), $id);
-        }else{
+        if($this->checkExist($id) == false){
             return ['error'=>'Cliente nao encontrado!'];
         }
+        return $this->service->update($request->all(), $id);
+
     }
 
     /**
