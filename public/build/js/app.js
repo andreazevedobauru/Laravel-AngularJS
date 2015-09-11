@@ -64,23 +64,23 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
         /***********************
         * Rotas para Projects
         ************************/
-        .when('/projects/:id/notes',{
-            templateUrl: 'build/views/project-note/index.html',
-            controller:  'ProjectNoteRemoveController'
+        .when('/project/:id/notes',{
+            templateUrl: 'build/views/project-note/list.html',
+            controller:  'ProjectNoteListController'
         })
-        .when('/projects/:id/notes/:idNote',{
+        .when('/project/:id/notes/:idNote',{
             templateUrl: 'build/views/project-note/show.html',
-            controller:  'ProjectNoteRemoveController'
+            controller:  'ProjectNoteShowController'
         })
-        .when('/projects/:id/notes/new',{
+        .when('/project/:id/notes/new',{
             templateUrl: 'build/views/project-note/new.html',
-            controller:  'ProjectNoteRemoveController'
+            controller:  'ProjectNoteNewController'
         })
-        .when('/projects/:id/notes/edit/:idNote',{
+        .when('/project/:id/notes/edit/:idNote',{
             templateUrl: 'build/views/project-note/edit.html',
-            controller:  'ProjectNoteRemoveController'
+            controller:  'ProjectNoteEditController'
         })
-        .when('/projects/:id/notes/remove/:idNote',{
+        .when('/project/:id/notes/remove/:idNote',{
             templateUrl: 'build/views/project-note/remove.html',
             controller:  'ProjectNoteRemoveController'
         });

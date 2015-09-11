@@ -2,8 +2,8 @@
  * Created by andre on 09/09/2015.
  */
 angular.module('app.controllers')
-    .controller('ProjectNoteNewController', ['$scope', '$location', 'Client',
-        function ($scope, $location, Client) {
+    .controller('ProjectNoteNewController', ['$scope', '$location', 'ProjectNote',
+        function ($scope, $location, ProjectNote) {
             $scope.client = new Client();
             
             $scope.save = function () {

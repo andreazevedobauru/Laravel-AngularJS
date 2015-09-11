@@ -93,8 +93,10 @@
         <script src="{{ asset('build/js/controllers/project-note/projectNoteNew.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-note/projectNoteEdit.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-note/projectNoteRemove.js') }}" ></script>
+        <script src="{{ asset('build/js/controllers/project-note/projectNoteList.js') }}" ></script>
 		<!-- Services -->
 		<script src="{{ asset('build/js/services/client.js') }}" ></script>
+		<script src="{{ asset('build/js/services/projectNote.js') }}" ></script>
 
 	@else
         <script src="{{ elixir('js/all.js') }}" ></script>

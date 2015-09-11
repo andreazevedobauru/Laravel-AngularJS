@@ -2,8 +2,8 @@
  * Created by andre on 09/09/2015.
  */
 angular.module('app.controllers')
-    .controller('ProjectNoteEditController', ['$scope', '$routeParams', '$location', 'Client',
-        function ($scope, $routeParams, $location, Client) {
+    .controller('ProjectNoteEditController', ['$scope', '$routeParams', '$location', 'ProjectNote',
+        function ($scope, $routeParams, $location, ProjectNote) {
             $scope.client = Client.get({id: $routeParams.id});
             
             $scope.save = function () {

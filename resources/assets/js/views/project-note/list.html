@@ -2,27 +2,24 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Listagem de Clientes</div>
+                <div class="panel-heading">Listagem de Notas de Projeto</div>
                 <div class="panel-body">
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Responsible</th>
-                                <th>E-mail</th>
-                                <th>Phone</th>
-                                <th>Action</th>
+                                <th>Title</th>
+                                <th>Note</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="o in clients">
-                                <td>{{o.nome}}</td>
-                                <td>{{o.responsible}}</td>
-                                <td>{{o.email}}</td>
-                                <td>{{o.telefone}}</td>
-                                <td><a ng-href="#/clients/{{o.id}}/edit">Editar</a>
-                                    | <a ng-href="#/clients/{{o.id}}/remove">Excluir</a>
+                            <tr ng-repeat="o in projectNotes">
+                                <td>{{o.title}}</td>
+                                <td>{{o.note}}</td>
+
+                                <td><a ng-href="#/project-note/{{o.project_id}}/notes/{{o.id}}/edit">Editar</a>
+                                    | <a ng-href="#/project-note/{{o.project_id}}/notes/{{o.id}}/remove">Excluir</a>
                                 </td>
                             </tr>
                         </tbody>
