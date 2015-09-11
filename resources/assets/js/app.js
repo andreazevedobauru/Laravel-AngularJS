@@ -60,6 +60,29 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
         .when('/clients/:id/remove',{
             templateUrl: 'build/views/client/remove.html',
             controller:  'ClientRemoveController'
+        })
+        /***********************
+        * Rotas para Projects
+        ************************/
+        .when('/projects/:id/notes',{
+            templateUrl: 'build/views/project-note/index.html',
+            controller:  'ProjectNoteRemoveController'
+        })
+        .when('/projects/:id/notes/:idNote',{
+            templateUrl: 'build/views/project-note/show.html',
+            controller:  'ProjectNoteRemoveController'
+        })
+        .when('/projects/:id/notes/new',{
+            templateUrl: 'build/views/project-note/new.html',
+            controller:  'ProjectNoteRemoveController'
+        })
+        .when('/projects/:id/notes/edit/:idNote',{
+            templateUrl: 'build/views/project-note/edit.html',
+            controller:  'ProjectNoteRemoveController'
+        })
+        .when('/projects/:id/notes/remove/:idNote',{
+            templateUrl: 'build/views/project-note/remove.html',
+            controller:  'ProjectNoteRemoveController'
         });
 
         OAuthProvider.configure({
