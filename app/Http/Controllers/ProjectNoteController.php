@@ -86,8 +86,11 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id, $noteId)
+    public function destroy($id)
     {
-        return $this->repository->delete($noteId);
+        if($this->repository->delete($id)){
+            return ['success' => true];
+        }
+        return ['error' => '404', 'message' => 'Object Not found'];
     }
 }
