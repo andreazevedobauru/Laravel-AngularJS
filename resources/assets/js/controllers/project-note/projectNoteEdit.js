@@ -11,10 +11,9 @@ angular.module('app.controllers')
             
             $scope.save = function () {
                 if($scope.form.$valid){
-                    ProjectNote.update({id: $scope.projectNote.id}, $scope.projectNote, function () {
-                        $location.path('/project/');
+                    ProjectNote.update({id: null, idNote: $scope.projectNote.id}, $scope.projectNote, function () {
+                        $location.path('/project/'+$routeParams.id+'/notes');
                     });
-
                 }
             }
         }]);

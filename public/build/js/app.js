@@ -76,11 +76,11 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/project-note/new.html',
             controller:  'ProjectNoteNewController'
         })
-        .when('/project/:id/notes/edit/:idNote',{
+        .when('/project/:id/notes/:idNote/edit',{
             templateUrl: 'build/views/project-note/edit.html',
             controller:  'ProjectNoteEditController'
         })
-        .when('/project/:id/notes/remove/:idNote',{
+        .when('/project/:id/notes/:idNote/remove',{
             templateUrl: 'build/views/project-note/remove.html',
             controller:  'ProjectNoteRemoveController'
         });
