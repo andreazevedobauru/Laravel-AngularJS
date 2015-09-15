@@ -62,7 +62,26 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             controller:  'ClientRemoveController'
         })
         /***********************
-        * Rotas para Projects
+        * Rotas para Project
+        ************************/
+        .when('/projects',{
+            templateUrl: 'build/views/project/list.html',
+            controller:  'ProjectListController'
+        })
+        .when('/projects/new',{
+            templateUrl: 'build/views/project/new.html',
+            controller:  'ProjectNewController'
+        })
+        .when('/project/:id/edit',{
+            templateUrl: 'build/views/project/edit.html',
+            controller:  'ProjectEditController'
+        })
+        .when('/project/:id/remove',{
+            templateUrl: 'build/views/project/remove.html',
+            controller:  'ProjectRemoveController'
+        })
+        /***********************
+        * Rotas para ProjectNote
         ************************/
         .when('/project/:id/notes',{
             templateUrl: 'build/views/project-note/list.html',
