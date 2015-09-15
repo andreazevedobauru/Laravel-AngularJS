@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Listagem de Projeto</div>
+                <div class="panel-body">
+
+                    <table class="table">
+                        <thead>
+                        <!--
+                        'project_id' => $project->id,
+                        'client_id' => $project->client_id,
+                        'owner_id' => $project->owner_id,
+                        'members' => $project->members,
+                        'project' => $project->nome,
+                        'description' => $project->description,
+                        'progress' => $project->progress,
+                        'status' => $project->status,
+                        'due_date' => $project->due_date,
+                        !-->
+                            <tr>
+                                <th>Nome</th>
+                                <th>Client</th>
+                                <th>Progress</th>
+                                <th>Status</th>
+                                <th>Due date</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="o in projects">
+                                <td>{{o.project}}</td>
+                                <td>{{o.client.nome}}...</td>
+                                <td>{{o.progress}}</td>
+                                <td>{{o.status}}</td>
+                                <td>{{o.due_date}}</td>
+
+                                <td>
+                                      <a ng-href="#/project/{{o.project_id}}/edit">Notas</a>
+                                    | <a ng-href="#/project/{{o.project_id}}/edit">Editar</a>
+                                    | <a ng-href="#/project/{{o.project_id}}/remove">Excluir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
