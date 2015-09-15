@@ -2,21 +2,41 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
+use GerenciadorProjeto\Services\UserService;
 use Illuminate\Http\Request;
 
 use GerenciadorProjeto\Http\Requests;
-use GerenciadorProjeto\Http\Controllers\Controller;
-use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use GerenciadorProjeto\Repositories\UserRepository;
+//use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
 {
-    public function __construction(UserRepository $userRepository){
+    /**
+     * @var UserRepository
+     */
+    private $repository;
+
+    /**
+     * @var UserService
+     */
+    private $service;
+
+    public function __construct(UserRepository $repository, UserService $service){
         $this->repository = $repository;
+        $this->service = $service;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function authenticated(){
-        $userId = Authorizer::getResourceOwnerId();
-        return $this->repository->find($userId);
+        //$userId = Authorizer::getResourceOwnerId();
+        //var_dump(\Authorizer::getResourceOwnerId());
+        // \Authorizer::getResourceOwnerId();
+
+        return $this->repository->skipPresenter()->find(13);
     }
 
     /**

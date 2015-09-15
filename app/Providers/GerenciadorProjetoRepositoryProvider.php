@@ -24,8 +24,9 @@ class GerenciadorProjetoRepositoryProvider extends ServiceProvider
     public function register()
     {
 
-        //$this->app->bind(\GerenciadorProjeto\Repositories\UserRepository::class, \GerenciadorProjeto\Repositories\UserRepositoryEloquent::class);
+        $this->app->bind(\GerenciadorProjeto\Repositories\UserRepository::class, \GerenciadorProjeto\Repositories\UserRepositoryEloquent::class);
         $this->app->bind(\GerenciadorProjeto\Repositories\ClientRepository::class, \GerenciadorProjeto\Repositories\ClientRepositoryEloquent::class);
+        //$this->app->bind(\GerenciadorProjeto\Repositories\UserRepository::class, \GerenciadorProjeto\Repositories\UserRepositoryEloquent::class);
         $this->app->bind(\GerenciadorProjeto\Repositories\ProjectRepository::class, \GerenciadorProjeto\Repositories\ProjectRepositoryEloquent::class);
         $this->app->bind(\GerenciadorProjeto\Repositories\ProjectNoteRepository::class, \GerenciadorProjeto\Repositories\ProjectNoteRepositoryEloquent::class);
     }
