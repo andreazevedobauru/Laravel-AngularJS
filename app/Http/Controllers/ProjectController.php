@@ -66,8 +66,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        if($this->checkProjectPermissions($id) == false){
-            return ['error'=>'Access Forbidden'];
+        if($this->checks($id) == false){
+            return ['error'=>'Access Forbidden or Project Not Found'];
         }
         return $this->repository->find($id);
 
@@ -82,8 +82,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($this->checkProjectPermissions($id) == false){
-            return ['error'=>'Access Forbidden'];
+        if($this->checks($id) == false){
+            return ['error'=>'Access Forbidden or Project Not Found'];
         }
         return $this->service->update($request->all(), $id);
     }
@@ -96,6 +96,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        if($this->checks($id) == false){
+            return ['error'=>'Access Forbidden or Project Not Found'];
+        }
         return $this->repository->delete($id);
     }
 
@@ -118,5 +121,21 @@ class ProjectController extends Controller
         }
 
         return false;
+    }
+
+    private function checkExist($id){
+        if($this->repository->find($id)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private function checks($id){
+        if($this->checkProjectPermissions($id) == false || $this->checkExist($id) == false){
+            return false;
+        }
+
+        return true;
     }
 }
