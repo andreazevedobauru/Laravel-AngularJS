@@ -4,20 +4,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Listagem de Projeto</div>
                 <div class="panel-body">
-
+                    <label>Procurar: <input class="form-control" ng-model="search"></label>
                     <table class="table">
                         <thead>
-                        <!--
-                        'project_id' => $project->id,
-                        'client_id' => $project->client_id,
-                        'owner_id' => $project->owner_id,
-                        'members' => $project->members,
-                        'project' => $project->nome,
-                        'description' => $project->description,
-                        'progress' => $project->progress,
-                        'status' => $project->status,
-                        'due_date' => $project->due_date,
-                        !-->
                             <tr>
                                 <th>Nome</th>
                                 <th>Client</th>
@@ -28,16 +17,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="o in projects">
+                            <tr ng-repeat="o in projects | filter:search">
                                 <td>{{o.project}}</td>
-                                <td>{{o.client.nome}}...</td>
+                                <td>{{o.client.nome}}</td>
                                 <td>{{o.progress}}</td>
                                 <td>{{o.status}}</td>
-                                <td>{{o.due_date}}</td>
+                                <td>{{o.due_date | dateBR}}</td>
 
                                 <td>
-                                      <a ng-href="#/project/{{o.project_id}}/edit">Notas</a>
-                                    | <a ng-href="#/project/{{o.project_id}}/edit">Editar</a>
+                                      <a ng-href="#/project/{{o.project_id}}/edit">Editar</a>
                                     | <a ng-href="#/project/{{o.project_id}}/remove">Excluir</a>
                                 </td>
                             </tr>

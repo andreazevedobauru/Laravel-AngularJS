@@ -99,7 +99,9 @@
         <script src="{{ asset('build/js/controllers/project-note/projectNoteNew.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-note/projectNoteEdit.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-note/projectNoteRemove.js') }}" ></script>
-		<!-- Services -->
+        <!-- Filters -->
+        <script src="{{ asset('build/js/filters/date-br.js') }}" ></script>
+        <!-- Services -->
         <script src="{{ asset('build/js/services/user.js') }}" ></script>
         <script src="{{ asset('build/js/services/client.js') }}" ></script>
         <script src="{{ asset('build/js/services/project.js') }}" ></script>
