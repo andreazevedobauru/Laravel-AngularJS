@@ -29,7 +29,7 @@ class Project extends Model implements Transformable
     }
 
     public function clients(){
-        return $this->hasOne(Client::class, 'id');
+        return $this->hasMany(Client::class, 'id');
     }
 
     public function files(){
