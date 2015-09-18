@@ -32,6 +32,10 @@ class Project extends Model implements Transformable
         return $this->hasMany(Client::class, 'id');
     }
 
+    public function tasks(){
+        return $this->hasMany(ProjectTask::class);
+    }
+
     public function files(){
         return $this->hasMany(ProjectFile::class);
     }
