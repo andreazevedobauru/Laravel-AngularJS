@@ -66,11 +66,7 @@ class ClientController extends Controller
     public function show($id)
     {
         if($this->checkExist($id)){
-            if($this->checkExistProjects($id)) {
                 return $this->repository->find($id);
-            }else{
-                return ['error'=>'Cliente tem projetos existentes'];
-            }
         }else{
             return ['error'=>'Cliente nao encontrado!'];
         }
@@ -87,14 +83,9 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         if($this->checkExist($id)){
-            if($this->checkExistProjects($id)) {
-                return $this->service->update($request->all(), $id);
-            }else{
-                return ['error'=>'Cliente tem projetos existentes'];
-            }
+            return $this->service->update($request->all(), $id);
         }
         return ['error'=>'Cliente nao encontrado!'];
-
     }
 
     /**
