@@ -66,7 +66,11 @@ class ClientController extends Controller
     public function show($id)
     {
         if($this->checkExist($id)){
-            return $this->repository->find($id);
+            if($this->checkExistProjects($id)) {
+                return $this->repository->find($id);
+            }else{
+                return ['error'=>'Cliente tem projetos existentes'];
+            }
         }else{
             return ['error'=>'Cliente nao encontrado!'];
         }
@@ -82,10 +86,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($this->checkExist($id) == false){
-            return ['error'=>'Cliente nao encontrado!'];
+        if($this->checkExist($id)){
+            if($this->checkExistProjects($id)) {
+                return $this->service->update($request->all(), $id);
+            }else{
+                return ['error'=>'Cliente tem projetos existentes'];
+            }
         }
-        return $this->service->update($request->all(), $id);
+        return ['error'=>'Cliente nao encontrado!'];
 
     }
 
@@ -98,7 +106,11 @@ class ClientController extends Controller
     public function destroy($id)
     {
         if($this->checkExist($id)){
-            return $this->repository->delete($id);
+            if($this->checkExistProjects($id)) {
+                return $this->repository->delete($id);
+            }else{
+                return ['error'=>'Cliente tem projetos existentes'];
+            }
         }else{
             return ['error'=>'Cliente nao encontrado!'];
         }
@@ -118,4 +130,15 @@ class ClientController extends Controller
             return false;
         }
     }
+
+    private function checkExistProjects($id){
+        $client = Client::find($id);
+
+        if($client->projects > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
