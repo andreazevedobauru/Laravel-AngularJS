@@ -10,26 +10,27 @@ namespace GerenciadorProjeto\Services;
 
 
 use GerenciadorProjeto\Entities\ProjectTask;
-use GerenciadorProjeto\Repositories\ProjectRepository;
-use GerenciadorProjeto\Validators\ProjectValidator;
+use GerenciadorProjeto\Repositories\ProjectTaskRepository;
+use GerenciadorProjeto\Validators\ProjectTaskValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
 
 
-class ProjectService
+class ProjectTaskService
 {
     /*
-     * @var ProjectRepository
+     * @var ProjectTaskRepository
      */
+
     protected $repository;
 
     /**
-     * @var ProjectValidator
+     * @var ProjectTaskValidator
      */
     protected $validator;
 
-    public function __construct(ProjectRepository $repository, ProjectValidator $validator, Filesystem $filesystem, Storage $storage){
+    public function __construct(ProjectTaskRepository $repository, ProjectTaskValidator $validator, Filesystem $filesystem, Storage $storage){
         $this->repository = $repository;
         $this->validator = $validator;
         $this->filesystem = $filesystem;
@@ -60,6 +61,30 @@ class ProjectService
         }
     }
 
+    public function addMember(array $data, $id){
+        try{
+            $this->taskValidator->with($data)->passesOrFail();
+            return $this->taskRepository->create($data);
+        }catch( ValidatorException $e ){
+            return [
+                'error' => true,
+                'message' => $e->getMessageBag()
+            ];
+        }
+    }
+
+    public function removeMember(array $data, $id){
+
+    }
+
+    public function isMember(array $data, $id){
+
+    }
+
+/*- addMember: para adicionar um novo member em um projeto
+- removeMember: para remover um membro de um projeto
+- isMember: para verificar se um usuário é membro de um determinado projeto
+*/
     public function createFile(array $data){
         $project = $this->repository->skipPresenter()->find($data['project_id']);
         //dd($project);
