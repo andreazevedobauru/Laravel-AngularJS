@@ -63,8 +63,8 @@ class ProjectTaskService
 
     public function addMember(array $data, $id){
         try{
-            $this->taskValidator->with($data)->passesOrFail();
-            return $this->taskRepository->create($data);
+            $this->validator->with($data)->passesOrFail();
+            return $this->repository->create($data);
         }catch( ValidatorException $e ){
             return [
                 'error' => true,
@@ -85,11 +85,5 @@ class ProjectTaskService
 - removeMember: para remover um membro de um projeto
 - isMember: para verificar se um usuário é membro de um determinado projeto
 */
-    public function createFile(array $data){
-        $project = $this->repository->skipPresenter()->find($data['project_id']);
-        //dd($project);
-        $projectFile = $project->files()->create($data);
-        $this->storage->put( $projectFile->id.'.'.$data['extension'], $this->filesystem->get($data['file']) );
 
-    }
 }
