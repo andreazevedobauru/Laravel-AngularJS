@@ -30,6 +30,9 @@ app.provider('appConfig', function () {
 
 app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvider', 'OAuthTokenProvider',
     function($routeProvider, $httpProvider, OAuthProvider, appConfigProvider, OAuthTokenProvider){
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
         $httpProvider.defaults.transformResponse = function(data, headers){
             var headersGetter = headers();
             if(headersGetter['content-type'] == 'application/json' || headersGetter['content-type'] == 'text/json') {
