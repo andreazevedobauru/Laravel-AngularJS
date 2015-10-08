@@ -49,7 +49,7 @@
                         <div class="form-group" ng-class="{'has-error': !form.due_date.$valid && form.due_date.$touched}">
                             <label class="col-md-4 control-label">Due Date</label>
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="due_date" value="" ng-model="project.due_date" required>
+                                <input type="text" class="form-control" name="due_date" value="" ng-model="project.due_date" required>
 
                                 <div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
                                     <div ng-message="required">Campo Obrigatorio !</div>
