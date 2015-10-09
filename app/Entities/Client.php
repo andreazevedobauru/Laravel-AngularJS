@@ -20,6 +20,6 @@ class Client extends Model
     ];
 
     public function projects(){
-        return $this->belongsToMany(Project::class, 'projects', 'client_id', 'id');
+        return $this->belongsToMany(Project::class/*, 'projects', 'client_id', 'id'*/);
     }
 }

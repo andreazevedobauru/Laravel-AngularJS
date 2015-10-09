@@ -8,7 +8,7 @@ angular.module('app.filters', []);
 angular.module('app.services', ['ngResource']);
 
 
-app.provider('appConfig', function () {
+app.provider('appConfig', ['$httpParamSerializerProvider', function ($httpParamSerializerProvider) {
     var config = {
         baseUrl: 'http://laravel-angular',
         project: {
@@ -17,7 +17,39 @@ app.provider('appConfig', function () {
                 {value: 2, label: 'Iniciado'},
                 {value: 3, label: 'Concluido'}
             ]
+        },
+        projectTask: {
+            status: [
+                {value: 1, label: 'Incompleta'},
+                {value: 2, label: 'Completa'}
+            ]
+        },
+        urls: {
+            projectFile: '/project/{{id}}/file/{{idFile}}'
+        },
+        utils: {
+            transformRequest: function(data) {
+                if (angular.isObject(data)) {
+                    return $httpParamSerializerProvider.$get()(data);
+                };
+                return data;
+            },
+            transformResponse: function(data, headers) {
+                var headersGetter = headers();
+
+                if (headersGetter['content-type'] == 'application/json' ||
+                    headersGetter['content-type'] == 'text/json') {
+                    var dataJson = JSON.parse(data);
+                    if (dataJson.hasOwnProperty('data')) {
+                        dataJson = dataJson.data;
+                    }
+                    return dataJson;
+                }
+
+                return data;
+            }
         }
+
     };
 
     return {
@@ -26,12 +58,14 @@ app.provider('appConfig', function () {
             return config;
         }
     }
-});
+}]);
 
 app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvider', 'OAuthTokenProvider',
     function($routeProvider, $httpProvider, OAuthProvider, appConfigProvider, OAuthTokenProvider){
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
+        $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
         $httpProvider.defaults.transformResponse = function(data, headers){
             var headersGetter = headers();
