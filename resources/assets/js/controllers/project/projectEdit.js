@@ -2,16 +2,17 @@
  * Created by andre on 09/09/2015.
  */
 angular.module('app.controllers')
-    .controller('ProjectEditController', ['$scope', '$routeParams', '$location', 'Project',
-        function ($scope, $routeParams, $location, Project) {
-            $scope.project = Project.get({
-                id: $routeParams.id
-            });
-            
+    .controller('ProjectEditController',['$scope','$routeParams', '$location', '$cookies','Project', 'Client', 'appConfig',
+        function ($scope, $routeParams, $location, $cookies, Project, Client, appConfig) {
+            $scope.project = Project.get({id: $routeParams.id});
+            $scope.clients = Client.query();
+            $scope.status  = appConfig.project.status;
+
             $scope.save = function () {
                 if($scope.form.$valid){
-                    Project.update({id: $scope.project.id}, $scope.project, function () {
-                        $location.path('/project/'+$routeParams.id);
+                    $scope.project.owner_id = $cookies.getObject('user').id;
+                    Project.update({id: $scope.project.id}, $scope.project, function(){
+                       $location.path('/projects');
                     });
                 }
             }

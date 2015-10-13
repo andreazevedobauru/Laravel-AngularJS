@@ -2,33 +2,85 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edição de Nota de Projeto</div>
+                <div class="panel-heading">Edição de Projeto</div>
                 <div class="panel-body">
 
                     <form class="form-horizontal" role="form" name="form" method="POST" ng-submit="save()">
 
-                        <div class="form-group" ng-class="{'has-error': !form.title.$valid && form.title.$touched}">
-
-                            <label class="col-md-4 control-label">Titulo</label>
+                        <div class="form-group" ng-class="{'has-error': !form.nome.$valid && form.nome.$touched}">
+                            <label class="col-md-4 control-label">Nome</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="title" value="" ng-model="projectNote.title" required>
+                                                        <input type="text" class="form-control" name="nome" value="" ng-model="project.nome" required>
 
-                                <div ng-messages="form.title.$error" class="help-block" ng-show="form.title.$touched">
+                                <div ng-messages="form.nome.$error" class="help-block" ng-show="form.nome.$touched">
                                     <div ng-message="required">Campo Obrigatorio !</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-error': !form.note.$valid && form.note.$touched}">
-                            <label class="col-md-4 control-label">Obs</label>
+                        <div class="form-group" ng-class="{'has-error': !form.description.$valid && form.description.$touched}">
+                            <label class="col-md-4 control-label">Description</label>
                             <div class="col-md-6">
 
-                                <textarea class="form-control" name="note" value="" ng-model="projectNote.note" required></textarea>
+                                <textarea class="form-control" name="description" value="" ng-model="project.description" required></textarea>
 
-                                <div ng-messages="form.note.$error" class="help-block" ng-show="form.note.$touched">
+                                <div ng-messages="form.description.$error" class="help-block" ng-show="form.description.$touched">
                                     <div ng-message="required">Campo Obrigatorio !</div>
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.client_id.$valid && form.client_id.$touched}">
+
+                            <label class="col-md-4 control-label">Clients</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="client_id" ng-model="project.client_id"
+                                        ng-options="o.id as o.nome for o in clients" required>
+                                    <option value="">Selecione o Client</option>
+                                </select>
+                                <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.due_date.$valid && form.due_date.$touched}">
+                            <label class="col-md-4 control-label">Due Date</label>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" name="due_date" value="" ng-model="project.due_date" required>
+
+                                <div ng-messages="form.due_date.$error" class="help-block" ng-show="form.due_date.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.status.$valid && form.status.$touched}">
+                            <label class="col-md-4 control-label">Status</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="status" ng-model="project.status"
+                                        ng-options="o.value as o.label for o in status" required>
+                                    <option value="">Selecione o Status</option>
+                                </select>
+
+                                <div ng-messages="form.status.$error" class="help-block" ng-show="form.status.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{'has-error': !form.progress.$valid && form.progress.$touched}">
+                            <label class="col-md-4 control-label">Progress (%)</label>
+                            <div class="col-md-6">
+                                <input type="number" min="0" max="100" class="form-control" name="progress" value="" ng-model="project.progress" required>
+
+                                <div ng-messages="form.progress.$error" class="help-block" ng-show="form.progress.$touched">
+                                    <div ng-message="required">Campo Obrigatorio !</div>
+                                    <div ng-message="min">Valor minimo aceitavel é 0!</div>
+                                    <div ng-message="max">Valor maximo aceitavel é 100!</div>
+                                </div>
                             </div>
                         </div>
 
