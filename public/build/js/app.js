@@ -31,7 +31,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function ($httpParamS
             transformRequest: function(data) {
                 if (angular.isObject(data)) {
                     return $httpParamSerializerProvider.$get()(data);
-                };
+                }
                 return data;
             },
             transformResponse: function(data, headers) {
