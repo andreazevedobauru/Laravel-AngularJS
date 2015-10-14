@@ -2,12 +2,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Exclusão de nota de projeto</div>
+                <div class="panel-heading">Exclusão de projeto</div>
                 <div class="panel-body">
-                    <p>Confirmar exclusão desta nota de projeto? </p>
+                    <p>Confirmar exclusão deste projeto? </p>
                     <ul>
-                        <li><strong>Title:</strong> {{projectNote.title}}</li>
-                        <li><strong>Obs:</strong> {{projectNote.note}}</li>
+                        <li><strong>Nome:</strong> {{project.nome}}</li>
+                        <li><strong>Cliente:</strong> {{project.client.nome}}</li>
+                        <li><strong>Progress:</strong> {{project.progress}}</li>
+                        <li><strong>Status:</strong> {{project.status}}</li>
+                        <li><strong>Due date:</strong> {{project.due_date}}</li>
                     </ul>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
