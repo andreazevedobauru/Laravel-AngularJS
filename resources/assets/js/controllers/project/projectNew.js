@@ -15,7 +15,7 @@ angular.module('app.controllers')
                         $location.path('/projects');
                     });
                 }
-            }
+            };
 
             $scope.formatName = function(id){
                 if(id){
@@ -26,5 +26,13 @@ angular.module('app.controllers')
                     }
                 }
                 return '';
-            }
+            };
+
+            $scope.getClients = function(nome){
+                debugger;
+                return Client.query({
+                    search: nome,
+                    searchFields: 'nome:like'
+                }).$promise;
+            };
         }]);

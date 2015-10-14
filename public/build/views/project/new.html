@@ -36,7 +36,7 @@
                             <label class="col-md-4 control-label">Clients</label>
                             <div class="col-md-6">
                                 <input class="form-control" type="text" name="client_id" ng-model="project.client_id"
-                                       typeahead="o.id as o.nome for o in clients | filter:$viewValue | limitTo: 10"
+                                       typeahead="o.id as o.nome for o in getClients($viewValue)"
                                        typeahead-input-formatter="formatName($model)"/>
                                 <!--
                                 <select class="form-control" name="client_id" ng-model="project.client_id"
