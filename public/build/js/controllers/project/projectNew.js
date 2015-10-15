@@ -5,7 +5,6 @@ angular.module('app.controllers')
     .controller('ProjectNewController', ['$scope', '$location', '$cookies','Project', 'Client', 'appConfig',
         function ($scope, $location, $cookies, Project, Client, appConfig) {
             $scope.project = new Project();
-            $scope.clients = new Client.query();
             $scope.status  = appConfig.project.status;
 
             $scope.save = function () {
@@ -17,13 +16,9 @@ angular.module('app.controllers')
                 }
             };
 
-            $scope.formatName = function(id){
-                if(id){
-                    for(var i in $scope.clients){
-                        if($scope.clients[i].id == id){
-                            return $scope.clients[i].nome;
-                        }
-                    }
+            $scope.formatName = function(model){
+                if(model){
+                    return model.nome;
                 }
                 return '';
             };
@@ -34,5 +29,9 @@ angular.module('app.controllers')
                     search: nome,
                     searchFields: 'nome:like'
                 }).$promise;
+            };
+
+            $scope.selectClient = function(item){
+                $scope.project.client_id = item.id;
             };
         }]);
