@@ -40,9 +40,12 @@
                                        typeahead="o as o.nome for o in getClients($viewValue)"
                                        typeahead-input-formatter="formatName($model)"
                                        typeahead-on-select="selectClient($item)"
+                                       typeahead-editable="false"
+                                       required
                                         />
                                 <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
                                     <div ng-message="required">Campo Obrigatorio !</div>
+                                    <div ng-message="editable">Cliente não encontrado !</div>
                                 </div>
                             </div>
 
