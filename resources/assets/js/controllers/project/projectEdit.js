@@ -4,8 +4,13 @@
 angular.module('app.controllers')
     .controller('ProjectEditController',['$scope','$routeParams', '$location', '$cookies','Project', 'Client', 'appConfig',
         function ($scope, $routeParams, $location, $cookies, Project, Client, appConfig) {
-            $scope.project = Project.get({id: $routeParams.id});
-            $scope.clients = Client.query();
+            Project.get({id: $routeParams.id}, function(data){
+                $scope.project = data;
+                Client.get({ id: data.client_id }, function(data){
+                    $scope.clientSelected  = data;
+                });
+            });
+
             $scope.status  = appConfig.project.status;
 
             $scope.save = function () {
@@ -15,5 +20,25 @@ angular.module('app.controllers')
                        $location.path('/projects');
                     });
                 }
-            }
+            };
+
+            $scope.formatName = function(model){
+                if(model){
+                    return model.nome;
+                }
+                return '';
+            };
+
+            $scope.getClients = function(nome){
+                debugger;
+                return Client.query({
+                    search: nome,
+                    searchFields: 'nome:like'
+                }).$promise;
+            };
+
+            $scope.selectClient = function(item){
+                $scope.project.client_id = item.id;
+            };
+
         }]);
