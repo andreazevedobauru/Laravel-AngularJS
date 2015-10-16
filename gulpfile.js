@@ -45,7 +45,7 @@ config.build_path_image = config.build_path + '/images';
 gulp.task('copy-font', function(){
     //De onde copiarei
     gulp.src([
-        config.assets_path + '/font/**/*'
+        config.assets_path + '/fonts/**/*'
     ])   //Para onde copiarei
         .pipe(gulp.dest(config.build_path_font))
         .pipe(livereload());
