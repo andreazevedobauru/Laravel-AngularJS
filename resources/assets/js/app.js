@@ -134,6 +134,25 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
         .when('/project/:id/notes/:idNote/remove',{
             templateUrl: 'build/views/project-note/remove.html',
             controller:  'ProjectNoteRemoveController'
+        }).
+    /***********************
+     * Rotas para ProjectFile
+     ************************/
+        .when('/project/:id/files',{
+            templateUrl: 'build/views/project-note/list.html',
+            controller:  'ProjectFileListController'
+        })
+        .when('/project/:id/files/new',{
+            templateUrl: 'build/views/project-note/new.html',
+            controller:  'ProjectFileNewController'
+        })
+        .when('/project/:id/files/:idNote/edit',{
+            templateUrl: 'build/views/project-note/edit.html',
+            controller:  'ProjectFileEditController'
+        })
+        .when('/project/:id/files/:idNote/remove',{
+            templateUrl: 'build/views/project-note/remove.html',
+            controller:  'ProjectFileRemoveController'
         });
 
         OAuthProvider.configure({
