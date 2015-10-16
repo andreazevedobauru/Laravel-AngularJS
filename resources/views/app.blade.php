@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="pt-br" ng-app="app">
 <head>
-	<meta charset="utf-8">
+
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="pt-br" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Eprom</title>
 
@@ -75,6 +77,7 @@
 		<script src="{{ asset('build/js/vendor/angular-cookies.min.js') }}" ></script>
 		<script src="{{ asset('build/js/vendor/query-string.js') }}" ></script>
 		<script src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}" ></script>
+		<script src="{{ asset('build/js/vendor/ng-file-upload.min.js') }}" ></script>
 
 		<script src="{{ asset('build/js/vendor/ui-bootstrap-tpls.min.js') }}" ></script>
 		<script src="{{ asset('build/js/vendor/navbar.min.js') }}" ></script>
