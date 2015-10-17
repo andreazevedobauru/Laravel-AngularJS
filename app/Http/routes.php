@@ -37,7 +37,13 @@ Route::group(['middleware'=>'oauth'], function(){
         Route::put('note/{idNote}', 'ProjectNoteController@update');
         Route::delete('note/{idNote}', 'ProjectNoteController@destroy');
 
+
+        Route::get('{id}/file', 'ProjectFileController@index');
+        Route::get('file/{fileId}', 'ProjectFileController@show');
+        Route::get('file/{fileId}/download', 'ProjectFileController@showFile');
         Route::post('{id}/file', 'ProjectFileController@store');
+        Route::put('{id}/file/', 'ProjectFileController@update');
+        Route::delete('{id}/file', 'ProjectFileController@destroy');
 
     });
 
