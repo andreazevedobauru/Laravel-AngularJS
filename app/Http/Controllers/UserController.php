@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use GerenciadorProjeto\Http\Requests;
 use GerenciadorProjeto\Repositories\UserRepository;
-//use LucaDegasperi\OAuth2Server\Facades\Authorizer;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
 {
@@ -32,11 +32,9 @@ class UserController extends Controller
      * @return Response
      */
     public function authenticated(){
-        //$userId = Authorizer::getResourceOwnerId();
-        //var_dump(\Authorizer::getResourceOwnerId());
-        // \Authorizer::getResourceOwnerId();
+        $userId = Authorizer::getResourceOwnerId();
 
-        return $this->repository->skipPresenter()->find(13);
+        return $this->repository->skipPresenter()->find($userId);
     }
 
     /**

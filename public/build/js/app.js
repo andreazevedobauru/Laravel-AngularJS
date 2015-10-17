@@ -14,7 +14,7 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function ($httpParamS
         baseUrl: 'http://laravel-angular',
         project: {
             status: [
-                {value: 1, label: 'Não iniciado'},
+                {value: 1, label: 'Nï¿½o iniciado'},
                 {value: 2, label: 'Iniciado'},
                 {value: 3, label: 'Concluido'}
             ]
@@ -134,7 +134,7 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
         .when('/project/:id/notes/:idNote/remove',{
             templateUrl: 'build/views/project-note/remove.html',
             controller:  'ProjectNoteRemoveController'
-        }).
+        })
     /***********************
      * Rotas para ProjectFile
      ************************/
