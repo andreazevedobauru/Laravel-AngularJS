@@ -28,7 +28,6 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
      */
     public function index()
     {
@@ -39,7 +38,6 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
      */
     public function create()
     {
@@ -50,7 +48,7 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
-     * @return Response
+     *
      */
     public function store(Request $request)
     {
@@ -62,11 +60,11 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     *
      */
     public function show($id)
     {
-        if($this->checks($id) == false){
+        if($this->service->checks($id) == false){
             return ['error'=>'Access Forbidden or Project Not Found'];
         }
         return $this->repository->find($id);
@@ -78,11 +76,11 @@ class ProjectController extends Controller
      *
      * @param  Request  $request
      * @param  int  $id
-     * @return Response
+     *
      */
     public function update(Request $request, $id)
     {
-        if($this->checks($id) == false){
+        if($this->service->checks($id) == false){
             return ['error'=>'Access Forbidden or Project Not Found'];
         }
         return $this->service->update($request->all(), $id);
@@ -92,11 +90,11 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     *
      */
     public function destroy($id)
     {
-        if($this->checks($id) == false){
+        if($this->service->checks($id) == false){
             return ['error'=>'Access Forbidden or Project Not Found'];
         }
         if($this->repository->delete($id)){
@@ -106,40 +104,5 @@ class ProjectController extends Controller
         }
     }
 
-    private function checkProjectOwner($projectId){
-        $userId     = \Authorizer::getResourceOwnerId();
 
-        return $this->repository->isOwner($projectId, $userId);
-    }
-
-    private function checkProjectMember($projectId){
-        $userId     = \Authorizer::getResourceOwnerId();
-
-        return $this->repository->hasMember($projectId, $userId);
-    }
-
-    private function checkProjectPermissions($projectId){
-
-        if($this->checkProjectOwner($projectId) || $this->checkProjectMember($projectId)){
-            return true;
-        }
-
-        return false;
-    }
-
-    private function checkExist($id){
-        if($this->repository->find($id)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    private function checks($id){
-        if($this->checkProjectPermissions($id) == false || $this->checkExist($id) == false){
-            return false;
-        }
-
-        return true;
-    }
 }

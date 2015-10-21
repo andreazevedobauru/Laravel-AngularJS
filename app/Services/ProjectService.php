@@ -62,9 +62,45 @@ class ProjectService
 
     public function createFile(array $data){
         $project = $this->repository->skipPresenter()->find($data['project_id']);
-        //dd($project);
         $projectFile = $project->files()->create($data);
         $this->storage->put( $projectFile->id.'.'.$data['extension'], $this->filesystem->get($data['file']) );
 
+    }
+
+    private function checkProjectOwner($projectId){
+        $userId     = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->isOwner($projectId, $userId);
+    }
+
+    private function checkProjectMember($projectId){
+        $userId     = \Authorizer::getResourceOwnerId();
+
+        return $this->repository->hasMember($projectId, $userId);
+    }
+
+    private function checkProjectPermissions($projectId){
+
+        if($this->checkProjectOwner($projectId) || $this->checkProjectMember($projectId)){
+            return true;
+        }
+
+        return false;
+    }
+
+    private function checkExist($id){
+        if($this->repository->find($id)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function checks($id){
+        if($this->checkProjectPermissions($id) == false || $this->checkExist($id) == false){
+            return false;
+        }
+
+        return true;
     }
 }
