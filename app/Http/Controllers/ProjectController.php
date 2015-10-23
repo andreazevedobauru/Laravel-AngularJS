@@ -97,11 +97,16 @@ class ProjectController extends Controller
         if($this->service->checks($id) == false){
             return ['error'=>'Access Forbidden or Project Not Found'];
         }
-        if($this->repository->delete($id)){
+
+        /*
+         * Comentado na aula: Consideracoes finais de refatoracao na api - 23/10/2015
+         * */
+        $this->repository->delete($id)
+        /*if($this->repository->delete($id)){
             return ['success' => true];
         }else{
             return ['error' => 'Try again.'];
-        }
+        }*/
     }
 
 
