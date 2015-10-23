@@ -101,13 +101,12 @@ class ProjectController extends Controller
         /*
          * Comentado na aula: Consideracoes finais de refatoracao na api - 23/10/2015
          * */
-        $this->repository->delete($id)
+        $this->repository->delete($id);
         /*if($this->repository->delete($id)){
             return ['success' => true];
         }else{
             return ['error' => 'Try again.'];
         }*/
     }
-
 
 }
