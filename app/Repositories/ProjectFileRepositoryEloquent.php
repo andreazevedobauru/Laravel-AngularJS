@@ -5,7 +5,7 @@ namespace GerenciadorProjeto\Repositories;
 use GerenciadorProjeto\Entities\Client;
 use GerenciadorProjeto\Entities\ProjectFile;
 use Prettus\Repository\Eloquent\BaseRepository;
-use GerenciadorProjeto\Presenters\ClientPresenter;
+use GerenciadorProjeto\Presenters\ProjectFilePresenter;
 
 /**
 * 

@@ -5,7 +5,7 @@ angular.module('app.services')
                 var urlMod = $interpolate(url)(params);
 
                 return urlMod.replace(/\/\//g, '/')
-                    .replace(/\/$/, '/');
+                    .replace(/\/$/, '');
             },
             getUrlResource: function (url) {
                 /*

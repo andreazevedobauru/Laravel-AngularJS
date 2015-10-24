@@ -12,10 +12,9 @@ namespace GerenciadorProjeto\Services;
 use GerenciadorProjeto\Repositories\ProjectFileRepository;
 use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Validators\ProjectFileValidator;
-use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Filesystem;
-use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Illuminate\Contracts\Filesystem\Factory as Storage;
+use Illuminate\Filesystem\Filesystem;
 
 class ProjectFileService
 {
