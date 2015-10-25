@@ -18,7 +18,9 @@
                             <tr ng-repeat="o in projectFiles">
                                 <td>{{o.name}}</td>
                                 <td>{{o.description | limitTo: 35}}...</td>
-                                <td><a ng-href="/project/file/{{o.id}}/download" target="_blank">Editar</a>
+                                <td>
+                                    <project-file-download></project-file-download>
+                                    <a ng-href="/project/file/{{o.id}}/download" target="_blank">Editar</a>
                                 </td>
                                 <td>
                                     <a ng-href="#/project/{{o.project_id}}/files/{{o.id}}/edit">Editar</a>
