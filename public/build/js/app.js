@@ -1,11 +1,12 @@
 /**
  * Created by andre on 03/09/2015.
  */
-var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters',
+var app = angular.module('app', ['ngRoute', 'angular-oauth2', 'app.controllers', 'app.services', 'app.filters', 'app.directives',
     'ui.bootstrap.typeahead', 'ui.bootstrap.datepicker', 'ui.bootstrap.tpls', 'ngFileUpload']);
 
 angular.module('app.controllers', ['ngMessages','angular-oauth2']);
 angular.module('app.filters', []);
+angular.module('app.directives', []);
 angular.module('app.services', ['ngResource']);
 
 
