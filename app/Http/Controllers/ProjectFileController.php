@@ -129,9 +129,9 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idNote)
     {
 
-        $this->service->delete($id);
+        $this->service->delete($idNote);
     }
 }

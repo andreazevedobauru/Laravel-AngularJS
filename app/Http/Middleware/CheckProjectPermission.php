@@ -5,7 +5,7 @@ namespace GerenciadorProjeto\Http\Middleware;
 use Closure;
 use GerenciadorProjeto\Services\ProjectService;
 
-class CheckProjectOwner
+class CheckProjectPermission
 {
     /*
      * @var ProjectService
@@ -26,11 +26,10 @@ class CheckProjectOwner
     public function handle($request, Closure $next)
     {
 
-        $projectId   = $request->route('id') ?  $request->route('id') : $request->route('project');
-        //$userId     = \Authorizer::getResourceOwnerId();
+        $projectId   = $request->route('id');
 
         if($this->service->checkProjectOwner($projectId) == false){
-            return ['error'=> 'Access forbidden'];
+            return ['error'=> 'You haven\'t permission to access project'];
         }
 
         return $next($request);

@@ -52,9 +52,11 @@ class ProjectNoteController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        return $this->service->create($request->all());
+        $data = $request->all();
+        $data['project_id'] = $id;
+        return $this->service->create($data);
     }
 
     /**
@@ -82,9 +84,11 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $idNote)
     {
-        return $this->service->update($request->all(), $id);
+        $data = $request->all();
+        $data['project_id'] = $id;
+        return $this->service->update($request->all(), $idNote);
     }
 
     /**
@@ -93,7 +97,7 @@ class ProjectNoteController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idNote)
     {
         if($this->repository->delete($id)){
             return ['success' => true];

@@ -67,7 +67,7 @@ class ProjectService
 
     }
 
-    private function checkProjectOwner($projectId){
+    public function checkProjectOwner($projectId){
         $userId     = \Authorizer::getResourceOwnerId();
 
         return $this->repository->isOwner($projectId, $userId);
