@@ -5,7 +5,7 @@ angular.module('app.controllers')
     .controller('ProjectFileRemoveController', ['$scope', '$routeParams', '$location', 'ProjectFile',
         function ($scope, $routeParams, $location, ProjectFile) {
             $scope.projectFile = ProjectFile.get({
-                id: $routeParams.id,
+                id: null,
                 idFile: $routeParams.idFile
             });
 
