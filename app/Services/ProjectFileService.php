@@ -12,6 +12,7 @@ namespace GerenciadorProjeto\Services;
 use GerenciadorProjeto\Repositories\ProjectFileRepository;
 use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Validators\ProjectFileValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
@@ -57,7 +58,7 @@ class ProjectFileService
 
     public function create(array $data){
         try{
-            $this->validator->with($data)->passesOrFail();
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
             $projectFile = $project->files()->create($data);
@@ -75,7 +76,7 @@ class ProjectFileService
 
     public function update(array $data, $id){
         try{
-            $this->validator->with($data)->passesOrFail();
+            $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
             return $this->repository->update($data, $id);
         }catch( ValidatorException $e ){
             return [

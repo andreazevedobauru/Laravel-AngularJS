@@ -120,7 +120,7 @@ class ProjectFileController extends Controller
         if($this->service->checkProjectPermissions($id) == false){
             return ['error'=>'Access Forbidden'];
         }
-        return $this->service->update(Request::all(), $id);
+        return $this->service->update($request->all(), $id);
     }
 
     /**
