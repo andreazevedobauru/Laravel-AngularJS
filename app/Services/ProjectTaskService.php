@@ -10,6 +10,7 @@ namespace GerenciadorProjeto\Services;
 
 
 use GerenciadorProjeto\Entities\ProjectTask;
+use GerenciadorProjeto\Repositories\ProjectRepository;
 use GerenciadorProjeto\Repositories\ProjectTaskRepository;
 use GerenciadorProjeto\Validators\ProjectTaskValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -22,25 +23,35 @@ class ProjectTaskService
     /*
      * @var ProjectTaskRepository
      */
-
     protected $repository;
+
+    /*
+     * @var ProjectRepository
+     */
+    protected $projectRepository;
 
     /**
      * @var ProjectTaskValidator
      */
     protected $validator;
 
-    public function __construct(ProjectTaskRepository $repository, ProjectTaskValidator $validator, Filesystem $filesystem, Storage $storage){
+    public function __construct(ProjectTaskRepository $repository,
+                                ProjectRepository $projectRepository,
+                                ProjectTaskValidator $validator){
         $this->repository = $repository;
+        $this->projectRepository = $projectRepository;
         $this->validator = $validator;
-        $this->filesystem = $filesystem;
-        $this->storage = $storage;
+
     }
 
     public function create(array $data){
         try{
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
+
+            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
+            $projectTask = $project->tasks()->create($data);
+
+            return $projectTask;
         }catch( ValidatorException $e ){
             return [
                 'error' => true,
@@ -52,6 +63,7 @@ class ProjectTaskService
     public function update(array $data, $id){
         try{
             $this->validator->with($data)->passesOrFail();
+
             return $this->repository->update($data, $id);
         }catch( ValidatorException $e ){
             return [
@@ -61,20 +73,9 @@ class ProjectTaskService
         }
     }
 
-    public function addMember(array $data, $id){
-        try{
-            $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
-        }catch( ValidatorException $e ){
-            return [
-                'error' => true,
-                'message' => $e->getMessageBag()
-            ];
-        }
-    }
-
-    public function removeMember(array $data, $id){
-
+    public function delete($id){
+        $projectTask = $this->repository->skipPresenter()->find($id);
+        return $projectTask->delete();
     }
 
     public function isMember(array $data, $id){

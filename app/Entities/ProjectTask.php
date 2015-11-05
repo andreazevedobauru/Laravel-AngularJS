@@ -19,6 +19,6 @@ class ProjectTask extends Model implements Transformable
     ];
 
     public function projects(){
-        return $this->belongsToMany(Project::class);
+        return $this->belongsTo(Project::class);
     }
 }

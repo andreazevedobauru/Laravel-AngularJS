@@ -22,6 +22,10 @@ class ProjectTaskRepositoryEloquent extends BaseRepository implements ProjectTas
         return ProjectTask::class;
     }
 
+    public function presenter(){
+        return ProjectTask::class;
+    }
+
     /**
      * Boot up the repository, pushing criteria
      */

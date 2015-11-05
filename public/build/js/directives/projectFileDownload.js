@@ -26,7 +26,6 @@ angular.module('app.directives')
                     $(anchor).addClass('disabled');
                     $(anchor).text('Loading...');
 
-                    debugger;
                     //tem que ver uma forma de pegar o id do projeto
                     ProjectFile.download({id: $attrs.idProject, idFile:$attrs.idFile}, function (data) {
                         $scope.$emit('salvar-arquivo', data);
