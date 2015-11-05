@@ -20,13 +20,15 @@ angular.module('app.directives')
                     });
                 });
             },
-            controller:['$scope','$element', '$attrs',  function ($scope, $element, $attrs, $timeout) {
+            controller:['$scope','$element', '$attrs',  function ($scope, $element, $attrs) {
                 $scope.downloadFile = function () {
                     var anchor = $element.children()[0];
                     $(anchor).addClass('disabled');
                     $(anchor).text('Loading...');
 
-                    ProjectFile.download({id: null, idFile:$attrs.idFile}, function (data) {
+                    debugger;
+                    //tem que ver uma forma de pegar o id do projeto
+                    ProjectFile.download({id: $attrs.idProject, idFile:$attrs.idFile}, function (data) {
                         $scope.$emit('salvar-arquivo', data);
                     })
                 };
