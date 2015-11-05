@@ -99,7 +99,7 @@ class ProjectNoteController extends Controller
      */
     public function destroy($id, $idNote)
     {
-        if($this->repository->delete($id)){
+        if($this->repository->delete($idNote)){
             return ['success' => true];
         }
         return ['error' => '404', 'message' => 'Object Not found'];
