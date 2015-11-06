@@ -2,10 +2,8 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
-use GerenciadorProjeto\Entities\ProjectTask;
 use GerenciadorProjeto\Repositories\ProjectTaskRepository;
 use GerenciadorProjeto\Services\ProjectTaskService;
-use GerenciadorProjeto\Services\ProjectService;
 use Illuminate\Http\Request;
 
 
@@ -14,7 +12,6 @@ class ProjectTaskController extends Controller
     /**
      * @var ProjectTaskService
      */
-
     private $service;
     /**
      * @var ProjectTaskRepository
@@ -33,7 +30,7 @@ class ProjectTaskController extends Controller
      */
     public function index($id)
     {
-        return $this->repository->findWhere(['project_id'=>$id]);
+        return $this->repository->skipPresenter()->with(['project'])->findWhere(['project_id'=>$id]);
     }
 
     /**
@@ -65,9 +62,9 @@ class ProjectTaskController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id, $noteId)
+    public function show($id, $taskId)
     {
-        $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$noteId]);
+        $result = $this->repository->findWhere(['project_id'=>$id, 'id'=>$taskId]);
         if(isset($result['data']) && count($result['data']) == 1){
             $result = [
                 'data' => $result['data'][0]

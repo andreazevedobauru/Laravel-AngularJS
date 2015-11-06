@@ -2,6 +2,7 @@
 
 namespace GerenciadorProjeto\Repositories;
 
+use GerenciadorProjeto\Presenters\ProjectTaskPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use GerenciadorProjeto\Entities\ProjectTask;
@@ -23,7 +24,7 @@ class ProjectTaskRepositoryEloquent extends BaseRepository implements ProjectTas
     }
 
     public function presenter(){
-        return ProjectTask::class;
+        return ProjectTaskPresenter::class;
     }
 
     /**
