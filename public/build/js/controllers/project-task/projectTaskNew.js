@@ -2,10 +2,31 @@
  * Created by andre on 09/09/2015.
  */
 angular.module('app.controllers')
-    .controller('ProjectTaskNewController', ['$scope', '$location', '$routeParams', 'ProjectTask',
-        function ($scope, $location, $routeParams, ProjectTask) {
+    .controller('ProjectTaskNewController', ['$scope', '$location', '$routeParams', 'ProjectTask', 'appConfig',
+        function ($scope, $location, $routeParams, ProjectTask, appConfig) {
             $scope.projectTask = new ProjectTask();
-            $scope.projectTask.project_id  = $routeParams.id;
+            $scope.status = appConfig.projectTask.status;
+
+            $scope.start_date = {
+                status: {
+                    opened: false
+                }
+            };
+
+            $scope.due_date = {
+                status: {
+                    opened: false
+                }
+            };
+
+            $scope.openStartDatePicker = function ($event) {
+                debugger;
+                $scope.start_date.status.opened = true;
+            };
+
+            $scope.openDueDatePicker = function ($event) {
+                $scope.due_date.status.opened = true;
+            };
 
             $scope.save = function () {
                 if($scope.form.$valid){
@@ -13,5 +34,5 @@ angular.module('app.controllers')
                         $location.path('/project/'+$routeParams.id+'/tasks');
                     });
                 }
-            }
+            };
         }]);

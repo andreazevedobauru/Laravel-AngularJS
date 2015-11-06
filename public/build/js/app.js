@@ -162,15 +162,15 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/project-task/list.html',
             controller:  'ProjectTaskListController'
         })
-        .when('/project/:id/tasks/new',{
+        .when('/project/:id/task/new',{
             templateUrl: 'build/views/project-task/new.html',
             controller:  'ProjectTaskNewController'
         })
-        .when('/project/:id/tasks/:idTask/edit',{
+        .when('/project/:id/task/:idTask/edit',{
             templateUrl: 'build/views/project-task/edit.html',
             controller:  'ProjectTaskEditController'
         })
-        .when('/project/:id/tasks/:idTask/remove',{
+        .when('/project/:id/task/:idTask/remove',{
             templateUrl: 'build/views/project-task/remove.html',
             controller:  'ProjectTaskRemoveController'
         });
