@@ -8,16 +8,23 @@
 
 namespace GerenciadorProjeto\Transformers;
 
-use GerenciadorProjeto\Entities\Project;
+use GerenciadorProjeto\Entities\ProjectMember;
 use League\Fractal\TransformerAbstract;
 use GerenciadorProjeto\Entities\User;
 
 class ProjectMemberTransformer extends TransformerAbstract
 {
-    public function transform(User $member){
+    protected $defaultIncludes = [
+        'user'
+    ];
+
+    public function transform(ProjectMember $member){
         return [
-            'member_id' => $member->id,
-            'nome'      => $member->name
+            'project_id' => $member->project_id
         ];
+    }
+
+    public function includeUser(ProjectMember $member){
+        return $this->item($member->member, new ProjectMemberTransformer());
     }
 }

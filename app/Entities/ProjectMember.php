@@ -15,8 +15,12 @@ class ProjectMember extends Model implements Transformable
         'member_id'
     ];
 
-    public  function notes(){
-        return $this->hasMany(ProjectNote::class);
+    public function project(){
+        return $this->belongsTo(Project::class);
+    }
+
+    public function member(){
+        return $this->belongsTo(User::class);
     }
 
 }

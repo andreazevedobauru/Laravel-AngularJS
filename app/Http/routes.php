@@ -26,6 +26,7 @@ Route::group(['middleware'=>'oauth'], function(){
    // Route::group(['middleware'=>'CheckProjectOwner'], function(){
 
     Route::resource('project', 'ProjectController', [ 'except' => ['create', 'edit'] ]);
+    Route::resource('project.member', 'ProjectMemberController', [ 'except' => ['create', 'edit', 'update'] ]);
 
    //});
 
@@ -53,5 +54,6 @@ Route::group(['middleware'=>'oauth'], function(){
     });
 
     Route::get('user/authenticated','UserController@authenticated');
+    Route::resource('user','UserController', ['except' => ['create', 'edit']]);
 
 });

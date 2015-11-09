@@ -2,20 +2,17 @@
 
 namespace GerenciadorProjeto\Repositories;
 
-use GerenciadorProjeto\Presenters\UserPresenter;
+use GerenciadorProjeto\Presenters\ProjectMemberPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use GerenciadorProjeto\Entities\User;
+use GerenciadorProjeto\Entities\ProjectMember;
 
 /**
- * Class UserRepositoryEloquent
+ * Class ProjectMemberRepositoryRepositoryEloquent
  * @package namespace GerenciadorProjeto\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectMemberRepository
 {
-    protected $fieldSearchable = [
-        'name'
-    ];
     /**
      * Specify Model class name
      *
@@ -23,7 +20,11 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return ProjectMemberRepository::class;
+    }
+
+    public function presenter(){
+        return ProjectMemberPresenter::class;
     }
 
     /**
@@ -32,9 +33,5 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria( app(RequestCriteria::class) );
-    }
-
-    public function presenter(){
-        return UserPresenter::class;
     }
 }
