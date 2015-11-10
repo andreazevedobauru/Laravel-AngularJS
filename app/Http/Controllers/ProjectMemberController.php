@@ -2,6 +2,9 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
+use GerenciadorProjeto\Entities\ProjectMember;
+use GerenciadorProjeto\Repositories\ProjectMemberRepository;
+use GerenciadorProjeto\Services\ProjectMemberService;
 use Illuminate\Http\Request;
 
 use GerenciadorProjeto\Http\Requests;
@@ -10,23 +13,30 @@ use GerenciadorProjeto\Http\Controllers\Controller;
 class ProjectMemberController extends Controller
 {
     /**
+     * @var ProjectMemberService
+     */
+
+    private $service;
+    /**
+     * @var ProjectMemberRepository
+     */
+    private $repository;
+
+    public function __construct(ProjectMemberRepository $repository, ProjectMemberService $service){
+        $this->repository = $repository;
+        $this->service = $service;
+        $this->middleware('check.project.owner', ['except'=>['index', 'store', 'show']]);
+        $this->middleware('check.project.permission', ['except'=>['index','store', 'update', 'destroy']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+        return $this->repository->findWhere(['project_id'=>$id]);
     }
 
     /**
@@ -35,9 +45,11 @@ class ProjectMemberController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['project_id'] = $id;
+        return $this->service->create($data);
     }
 
     /**
@@ -46,33 +58,11 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show($id, $idProjectMember)
     {
-        //
+        return $this->repository->find($idProjectMember);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +70,8 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, $idProjectMember)
     {
-        //
+        $this->service->delete($idProjectMember);
     }
 }
