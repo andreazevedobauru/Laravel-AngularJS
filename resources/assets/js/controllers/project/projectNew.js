@@ -33,10 +33,10 @@ angular.module('app.controllers')
                 return '';
             };
 
-            $scope.getClients = function(nome){
+            $scope.getClients = function(name){
                 debugger;
                 return Client.query({
-                    search: nome,
+                    search: name,
                     searchFields: 'nome:like'
                 }).$promise;
             };
