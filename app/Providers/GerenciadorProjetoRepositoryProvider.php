@@ -30,5 +30,6 @@ class GerenciadorProjetoRepositoryProvider extends ServiceProvider
         $this->app->bind(\GerenciadorProjeto\Repositories\ProjectNoteRepository::class, \GerenciadorProjeto\Repositories\ProjectNoteRepositoryEloquent::class);
         $this->app->bind(\GerenciadorProjeto\Repositories\ProjectTaskRepository::class, \GerenciadorProjeto\Repositories\ProjectTaskRepositoryEloquent::class);
         $this->app->bind(\GerenciadorProjeto\Repositories\ProjectFileRepository::class, \GerenciadorProjeto\Repositories\ProjectFileRepositoryEloquent::class);
+        $this->app->bind(\GerenciadorProjeto\Repositories\ProjectMemberRepository::class, \GerenciadorProjeto\Repositories\ProjectMemberRepositoryEloquent::class);
     }
 }

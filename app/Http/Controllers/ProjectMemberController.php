@@ -2,7 +2,7 @@
 
 namespace GerenciadorProjeto\Http\Controllers;
 
-use GerenciadorProjeto\Entities\ProjectMember;
+
 use GerenciadorProjeto\Repositories\ProjectMemberRepository;
 use GerenciadorProjeto\Services\ProjectMemberService;
 use Illuminate\Http\Request;
@@ -25,8 +25,8 @@ class ProjectMemberController extends Controller
     public function __construct(ProjectMemberRepository $repository, ProjectMemberService $service){
         $this->repository = $repository;
         $this->service = $service;
-        $this->middleware('check.project.owner', ['except'=>['index', 'store', 'show']]);
-        $this->middleware('check.project.permission', ['except'=>['index','store', 'update', 'destroy']]);
+        $this->middleware('check.project.owner', ['except'=>['index', 'show']]);
+        $this->middleware('check.project.permission', ['except'=>['store', 'destroy']]);
     }
 
     /**

@@ -22,4 +22,5 @@ class ProjectMember extends Model implements Transformable
     public function member(){
         return $this->belongsTo(User::class);
     }
+
 }

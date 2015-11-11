@@ -20,11 +20,7 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
      */
     public function model()
     {
-        return ProjectMemberRepository::class;
-    }
-
-    public function presenter(){
-        return ProjectMemberPresenter::class;
+        return ProjectMember::class;
     }
 
     /**
@@ -33,5 +29,9 @@ class ProjectMemberRepositoryEloquent extends BaseRepository implements ProjectM
     public function boot()
     {
         $this->pushCriteria( app(RequestCriteria::class) );
+    }
+
+    public function presenter(){
+        return ProjectMemberPresenter::class;
     }
 }

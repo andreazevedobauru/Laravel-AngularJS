@@ -112,6 +112,9 @@
         <script src="{{ asset('build/js/controllers/project-task/projectTaskNew.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-task/projectTaskEdit.js') }}" ></script>
         <script src="{{ asset('build/js/controllers/project-task/projectTaskRemove.js') }}" ></script>
+        <!--  Project-member  -->
+        <script src="{{ asset('build/js/controllers/project-member/projectMemberList.js') }}" ></script>
+        <script src="{{ asset('build/js/controllers/project-member/projectMemberRemove.js') }}" ></script>
 		<!-- Directives -->
 		<script src="{{ asset('build/js/directives/projectFileDownload.js') }}" ></script>
 		<!-- Filters -->
@@ -123,6 +126,7 @@
         <script src="{{ asset('build/js/services/projectNote.js') }}" ></script>
         <script src="{{ asset('build/js/services/projectFile.js') }}" ></script>
         <script src="{{ asset('build/js/services/projectTask.js') }}" ></script>
+        <script src="{{ asset('build/js/services/projectMember.js') }}" ></script>
         <script src="{{ asset('build/js/services/url.js') }}" ></script>
 
 	@else

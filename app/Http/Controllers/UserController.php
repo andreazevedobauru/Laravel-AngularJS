@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return $this->repository->with(['projects'])->all();
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->repository->with(['projects'])->find($id);
     }
 
     /**
