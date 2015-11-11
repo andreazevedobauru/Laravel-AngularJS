@@ -54,6 +54,6 @@ Route::group(['middleware'=>'oauth'], function(){
     });
 
     Route::get('user/authenticated','UserController@authenticated');
-    Route::resource('user','UserController', ['except' => ['create', 'edit']]);
+    Route::resource('user','UserController', ['except' => ['create', 'edit  ']]);
 
 });
