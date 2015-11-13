@@ -68,6 +68,7 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
         $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
+        $httpProvider.interceptors.push('oauthFixInterceptor');
 
     $routeProvider
         .when('/login', {
@@ -86,6 +87,9 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/home.html',
             controller:  'HomeController'
         })
+        /***********************
+         * Rotas para Client
+         ************************/
         .when('/clients',{
             templateUrl: 'build/views/client/list.html',
             controller:  'ClientListController'
@@ -144,9 +148,9 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/project-note/remove.html',
             controller:  'ProjectNoteRemoveController'
         })
-    /***********************
-     * Rotas para ProjectFile
-     ************************/
+        /***********************
+         * Rotas para ProjectFile
+         ************************/
         .when('/project/:id/files',{
             templateUrl: 'build/views/project-file/list.html',
             controller:  'ProjectFileListController'
@@ -163,9 +167,9 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/project-file/remove.html',
             controller:  'ProjectFileRemoveController'
         })
-    /***********************
-     * Rotas para ProjectTask
-     ************************/
+        /***********************
+         * Rotas para ProjectTask
+         ************************/
         .when('/project/:id/tasks',{
             templateUrl: 'build/views/project-task/list.html',
             controller:  'ProjectTaskListController'
@@ -182,9 +186,9 @@ app.config(['$routeProvider','$httpProvider', 'OAuthProvider', 'appConfigProvide
             templateUrl: 'build/views/project-task/remove.html',
             controller:  'ProjectTaskRemoveController'
         })
-    /***********************
-     * Rotas para ProjectMember
-     ************************/
+        /***********************
+         * Rotas para ProjectMember
+         ************************/
         .when('/project/:id/members',{
             templateUrl: 'build/views/project-member/list.html',
             controller:  'ProjectMemberListController'
@@ -224,16 +228,20 @@ app.run(['$rootScope', '$location', '$window', 'OAuth', function($rootScope, $lo
 
     $rootScope.$on('oauth:error', function(event, rejection) {
         // Ignore `invalid_grant` error - should be catched on `LoginController`.
+        console.log('Entrou');
         if ('invalid_grant' === rejection.data.error) {
+            console.log('invalid_grant');
             return;
         }
 
         // Refresh token when a `invalid_token` error occurs.
-        if ('invalid_token' === rejection.data.error) {
+        if ('access_denied' === rejection.data.error) {
+            console.log('access_denied');
+            debugger;
             return OAuth.getRefreshToken();
         }
 
         // Redirect to `/login` with the `error_reason`.
-        return $window.location.href = '/login?error_reason=' + rejection.data.error;
+        return $location('login');
     });
 }]);

@@ -127,6 +127,7 @@
         <script src="{{ asset('build/js/services/projectFile.js') }}" ></script>
         <script src="{{ asset('build/js/services/projectTask.js') }}" ></script>
         <script src="{{ asset('build/js/services/projectMember.js') }}" ></script>
+        <script src="{{ asset('build/js/services/oauthFixInterceptor.js') }}" ></script>
         <script src="{{ asset('build/js/services/url.js') }}" ></script>
 
 	@else
