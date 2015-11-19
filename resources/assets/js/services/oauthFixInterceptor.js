@@ -10,14 +10,21 @@ angular.module('app.services')
                 return config;
             },
             responseError: function(rejection) {
+                /*
+                Pegamos objeto para protelar
+                a decisao de resposta e erro
+                 */
+                var deferred = $q.defer();
+
+
                 if (400 === rejection.status && rejection.data && ("invalid_request" === rejection.data.error || "invalid_grant" === rejection.data.error)) {
                     OAuthToken.removeToken();
-                    $rootScope.$emit("oauth:error", rejection);
+                    $rootScope.$emit("oauth:error", {rejection: rejection, deferred: deferred });
                 }
                 if (401 === rejection.status && (rejection.data && "access_denied" === rejection.data.error) || rejection.headers("www-authenticate") && 0 === rejection.headers("www-authenticate").indexOf("Bearer")) {
                     $rootScope.$emit("oauth:error", rejection);
                 }
-                return $q.reject(rejection);
+                return deferred.promise;
             }
         };
     }]);
